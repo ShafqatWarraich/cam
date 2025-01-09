@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Detection</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #video {
+            width: 100%;
+            max-width: 640px;
+            height: auto;
+            border: 2px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Camera Webview</h1>
+    <video id="video" autoplay></video>
+
+    <script>
+        let videoElement = document.getElementById('video');
+
+        // Function to start the back camera
+        function startCamera() {
+            navigator.mediaDevices.getUserMedia({
+                video: { facingMode: 'environment' } // Always use the back camera
+            }).then(function(stream) {
+                videoElement.srcObject = stream;
+            }).catch(function(error) {
+                console.error("Error accessing camera: ", error);
+                alert("Camera access denied. Please allow access.");
+            });
+        }
+
+        // Start the camera on page load
+        startCamera();
+    </script>
+</body>
+</html>
